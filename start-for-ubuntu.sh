@@ -51,6 +51,13 @@ cat $Temp_Dir/proxy.txt >> $Temp_Dir/config.yaml
 \cp -f $Temp_Dir/config.yaml $Conf_Dir/
 if_success "配置文件合并完成" "配置文件合并失败"
 
+# 用户确认步骤
+read -p "请手动调整clash配置文件, 你确定要启动 Clash 服务吗？(输入 yes 确认): " confirm
+if [[ ! "$confirm" =~ ^[Yy][Ee][Ss]$ ]]; then
+    echo "用户取消启动。"
+    exit 0
+fi
+
 # 启动 Clash 服务
 echo "🚀 正在启动 Clash 服务..."
 # 确保二进制文件可执行

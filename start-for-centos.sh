@@ -57,6 +57,13 @@ cat $Temp_Dir/template_config.yaml > $Temp_Dir/config.yaml
 cat $Temp_Dir/proxy.txt >> $Temp_Dir/config.yaml
 \cp $Temp_Dir/config.yaml $Conf_Dir/
 
+# 用户确认步骤
+read -p "请手动调整clash配置文件, 你确定要启动 Clash 服务吗？(输入 yes 确认): " confirm
+if [[ ! "$confirm" =~ ^[Yy][Ee][Ss]$ ]]; then
+    echo "用户取消启动。"
+    exit 0
+fi
+
 # 赋予执行权限
 chmod +x $Server_Dir/clash-linux-amd64-v1.3.5
 
